@@ -3,22 +3,21 @@ import "./index.css"
 
 export const LifeCycleLogger = () => {
     const [count, setCount] = useState(0)
-    const hr = () => {
+    const appendChilds = (newElement) => {
         document.getElementById("console").appendChild(document.createElement("hr"))
+        document.getElementById("console").appendChild(newElement)
     }
 
     useEffect(() => {
         const newElement = document.createElement("span")
         newElement.innerHTML = "Елемент завантажено"
 
-        document.getElementById("console").appendChild(newElement)
-        hr()
+        appendChilds(newElement)
         return () => {
             const newElement = document.createElement("span")
             newElement.innerHTML = "Елемент відвантажено"
 
-            document.getElementById("console").appendChild(newElement)
-            hr()
+            appendChilds(newElement)
         }
     }, [])
 
@@ -28,8 +27,7 @@ export const LifeCycleLogger = () => {
         const newElement = document.createElement("span")
         newElement.innerHTML = "Лічильник змінено на: " + count
 
-        document.getElementById("console").appendChild(newElement)
-        hr()
+        appendChilds(newElement)
     }, [count])
 
     return (
